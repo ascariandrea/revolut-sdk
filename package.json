@@ -1,0 +1,48 @@
+{
+  "name": "revolut-sdk",
+  "version": "1.0.0",
+  "description": "SDK for Revolut API",
+  "main": "dist/index.js",
+  "author": "Andrea Ascari <dev.ascariandrea@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rm -rf dist/*",
+    "lint": "npm run lint-code && npm run lint-test",
+    "lint:fix": "npm run lint-code:fix && npm run lint-test:fix",
+    "lint-code": "tslint ./lib",
+    "lint-code:fix": "npm run lint-code -- --fix",
+    "lint-test": "tslint ./__tests__/",
+    "lint-test:fix": "npm run lint-test -- --fix",
+    "build": "npm run clean && tsc",
+    "start": "jest --watchAll",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/jest": "^21.1.8",
+    "@types/nock": "9.1.0",
+    "jest": "22.0.3",
+    "nock": "^9.1.4",
+    "ts-jest": "22.0.0",
+    "tslint": "^5.8.0",
+    "typescript": "^2.6.2"
+  },
+  "dependencies": {
+    "axios": "^0.17.1",
+    "fp-ts": "^0.6.5"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "testEnvironment": "node",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  }
+}

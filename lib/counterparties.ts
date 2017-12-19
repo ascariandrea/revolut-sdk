@@ -12,11 +12,11 @@ export default function counterparies(client: AxiosInstance) {
       return client.get(`/counterparty/${id}`).then(serializer);
     },
     getAll(): Promise<RevolutSDK.CounterParty> {
-      return client.get('/counterparies').then(serializer);
+      return client.get('/counterparties').then(serializer);
     },
-    del(id: string): Promise<RevolutSDK.CounterParty> {
-      return client.delete(`/counterpary/${id}`)
-        .then(serializer);
+    del(id: string): Promise<boolean> {
+      return client.delete(`/counterparty/${id}`)
+        .then((res: AxiosResponse<boolean>) => res.status === 204);
     },
   };
 }

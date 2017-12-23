@@ -44,5 +44,22 @@
       "json",
       "node"
     ]
-  }
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ascariandrea/revolut-sdk.git"
+  },
+  "keywords": [
+    "revolut",
+    "bank",
+    "sdk",
+    "typescript"
+  ],
+  "bugs": {
+    "url": "https://github.com/ascariandrea/revolut-sdk/issues"
+  },
+  "homepage": "https://github.com/ascariandrea/revolut-sdk#readme"
 }

@@ -1,22 +1,21 @@
-import { AxiosInstance, AxiosResponse } from 'axios';
-
-const serializer = (res: AxiosResponse<RevolutSDK.CounterParty>) => res.data;
+import { AxiosInstance } from 'axios';
+import { responseSerializer } from './utils';
 
 export default function counterparies(client: AxiosInstance) {
   return {
     add(counterparty: RevolutSDK.CounterPartyPayload): Promise<RevolutSDK.CounterParty> {
       return client.post('/counterparty', counterparty)
-        .then(serializer);
+        .then(responseSerializer.get);
     },
     get(id: string): Promise<RevolutSDK.CounterParty> {
-      return client.get(`/counterparty/${id}`).then(serializer);
+      return client.get(`/counterparty/${id}`).then(responseSerializer.get);
     },
     getAll(): Promise<RevolutSDK.CounterParty> {
-      return client.get('/counterparies').then(serializer);
+      return client.get('/counterparties').then(responseSerializer.get);
     },
-    del(id: string): Promise<RevolutSDK.CounterParty> {
-      return client.delete(`/counterpary/${id}`)
-        .then(serializer);
+    del(id: string): Promise<boolean> {
+      return client.delete(`/counterparty/${id}`)
+        .then(responseSerializer.del);
     },
   };
 }

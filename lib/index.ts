@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
+import accounts from './accounts';
 import counterparties from './counterparties';
 
 const API_VERSION = 1.0;
@@ -21,6 +22,9 @@ export default class RevolutClient {
     return this;
   }
 
+  get accounts() { return accounts(this.client); }
   get counterparties() { return counterparties(this.client); }
+
+
 
 }

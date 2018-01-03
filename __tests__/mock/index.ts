@@ -2,7 +2,7 @@ import * as nock from 'nock';
 import RevolutClient from '../../lib';
 import { account, accounts } from './accounts';
 import { counterparties, counterparty } from './counterparties';
-import { transfer } from './payments';
+import { transfer, payment } from './payments';
 
 export default function server() {
   return nock(RevolutClient.SANDBOX_URL)
@@ -24,7 +24,8 @@ export default function server() {
   // Payments
   .post('/transfer')
     .reply(201, transfer)
-
+  .post('/pay')
+    .reply(201, payment)
   ;
 
 }

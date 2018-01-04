@@ -101,4 +101,9 @@ export default class Payments extends API {
     return this.client.get(`/transaction/${requestId}`, { params: { id_type: 'request_id' }})
       .then<Transaction>((res: AxiosResponse<Transaction>) => responseSerializer.get(res));
   }
+
+  public cancel = (transactonId: string): Promise<boolean> => {
+    return this.client.delete(`/transaction/${transactonId}`)
+      .then(responseSerializer.del);
+  }
 }

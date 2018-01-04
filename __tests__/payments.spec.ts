@@ -70,5 +70,10 @@ describe('Payments', () => {
     expect(transaction.type).toEqual('transfer');
   });
 
+  it('Should cancel a payment', async () => {
+    const transactionId = '62b61a4f-fb09-4e87-b0ab-b66c85f5485c';
+    const deleted = await revolutClient.payments.cancel(transactionId);
+    expect(deleted).toBe(true);
+  });
 
 });

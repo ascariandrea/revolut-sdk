@@ -55,4 +55,11 @@ describe('Payments', () => {
 
     expect(payment.state).toEqual('created');
   });
+
+  it('Should request a transaction by id', async () => {
+    const transactionId = '62b61a4f-fb09-4e87-b0ab-b66c85f5485c';
+    const transaction = await revolutClient.payments.transactionById(transactionId);
+    expect(transaction.id).toEqual(transactionId);
+    expect(transaction.type).toEqual('transfer');
+  });
 });

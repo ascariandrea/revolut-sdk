@@ -1,8 +1,7 @@
 import { AxiosResponse } from 'axios';
-import { ISODate, ThreeLettersISOCurrencyCode, UUID } from '../common';
+import { ISOCountryCode, ISODate, ThreeLettersISOCurrencyCode, UUID } from '../common';
 import { responseSerializer } from '../utils';
 import API from './api';
-
 
 export type State = 'pending' | 'completed' | 'declined' | 'failed';
 export interface TransferData {
@@ -39,6 +38,47 @@ export interface Payment {
   reason: string;
   created_at: ISODate;
 }
+export interface Leg {
+  leg_id: UUID;
+  amount: number;
+  currency: ThreeLettersISOCurrencyCode;
+  bill_amount?: number;
+  bill_currency?: ThreeLettersISOCurrencyCode;
+  account_id: UUID;
+  counterparty: {
+    id: UUID;
+    account_id: UUID;
+    type: 'self' | 'revolut' | 'external';
+  };
+  description: string;
+  explanation: string;
+  card: {
+    card_number: string;
+    first_name: string;
+    last_name: string;
+    phone: string;
+  };
+}
+
+export interface Transaction {
+  id: UUID;
+  type: string;
+  request_id: string;
+  state: State;
+  reason?: 'declined' | 'failed';
+  created_at: ISODate;
+  updated_at: ISODate;
+  completed_at?: ISODate;
+  schedule_for?: ISODate;
+  merchant?: {
+    name: string;
+    city: string;
+    category_code: string;
+    country: ISOCountryCode;
+  };
+  legs: Leg[];
+
+}
 
 export default class Payments extends API {
 
@@ -50,5 +90,10 @@ export default class Payments extends API {
   public pay = (paymentData: PaymentData): Promise<Payment> => {
     return this.client.post('/pay', paymentData)
       .then<Payment>((res: AxiosResponse<Payment>) => responseSerializer.get(res));
+  }
+
+  public transactionById = (transactionId: string): Promise<Transaction> => {
+    return this.client.get(`/transaction/${transactionId}`)
+      .then<Transaction>((res: AxiosResponse<Transaction>) => responseSerializer.get(res));
   }
 }

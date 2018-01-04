@@ -2,7 +2,7 @@ import * as nock from 'nock';
 import RevolutClient from '../../lib';
 import { account, accounts } from './accounts';
 import { counterparties, counterparty } from './counterparties';
-import { transfer, payment, scheduledPayment } from './payments';
+import { payment, scheduledPayment, transaction, transfer } from './payments';
 
 export default function server() {
   return nock(RevolutClient.SANDBOX_URL)
@@ -28,6 +28,8 @@ export default function server() {
     .reply(201, scheduledPayment)
   .post('/pay')
     .reply(201, payment)
+  .get('/transaction/62b61a4f-fb09-4e87-b0ab-b66c85f5485c')
+    .reply(200, transaction)
   ;
 
 }

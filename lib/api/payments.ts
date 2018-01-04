@@ -1,7 +1,8 @@
-import API from './api';
+import { AxiosResponse } from 'axios';
 import { ISODate, ThreeLettersISOCurrencyCode, UUID } from '../common';
 import { responseSerializer } from '../utils';
-import { AxiosResponse } from 'axios';
+import API from './api';
+
 
 export type State = 'pending' | 'completed' | 'declined' | 'failed';
 export interface TransferData {
@@ -24,11 +25,12 @@ export interface PaymentData {
   account_id: UUID;
   receiver: {
     counterparty_id: UUID;
-    account_id: UUID;
+    account_id?: UUID;
   };
   amount: number;
   currency: ThreeLettersISOCurrencyCode;
   description: string;
+  schedule_for?: ISODate;
 }
 
 export interface Payment {

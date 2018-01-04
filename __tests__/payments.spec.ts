@@ -39,4 +39,20 @@ describe('Payments', () => {
     expect(payment.id).toBeDefined();
     expect(payment.state).toEqual('completed');
   });
+
+  it('Should schedule a payment', async () => {
+    const payment = await revolutClient.payments.pay({
+      request_id: 'e0cbf84637264ee082a848b',
+      account_id: 'bdab1c20-8d8c-430d-b967-87ac01af060c',
+      receiver: {
+        counterparty_id: '5138z40d1-05bb-49c0-b130-75e8cf2f7693',
+      },
+      amount: 123.11,
+      currency: 'EUR',
+      description: 'Invoice payment #123',
+      schedule_for: '2017-10-10',
+    });
+
+    expect(payment.state).toEqual('created');
+  });
 });

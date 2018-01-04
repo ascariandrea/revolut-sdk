@@ -11,3 +11,9 @@ export const payment = {
   created_at: '2017-10-01T10:10:10.0Z',
   completed_at: '2017-10-01T10:10:10.0Z',
 };
+
+export const scheduledPayment = {
+  id: 'd56dd396-523b-4613-8cc7-54974c17bcac',
+  state: 'created',
+  created_at: '2017-10-01T10:10:10.0Z',
+};

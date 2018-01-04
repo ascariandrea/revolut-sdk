@@ -52,3 +52,78 @@ export const transaction = {
     },
   ],
 };
+
+export const transactions = [
+  {
+    id: '62b61a4f-fb09-4e87-b0ab-b66c85f5485c',
+    type: 'transfer',
+    request_id: 'e0cbf84637264ee082a848b',
+    state: 'completed',
+    created_at: '2017-10-10T12:00:00Z',
+    updated_at: '2017-10-10T12:00:10Z',
+    completed_at: '2017-10-10T12:00:10Z',
+    legs: [
+      {
+        leg_id: '0485605a-6062-4820-981d-1736f4be0b2c',
+        account_id: 'bdab1c20-8d8c-430d-b967-87ac01af060c',
+        counterparty: {
+          id: '5138z40d1-05bb-49c0-b130-75e8cf2f7693',
+          type: 'revolut',
+          account_id: 'bdab1c20-8d8c-430d-b967-87ac01af060c',
+        },
+        amount: -123.11,
+        currency: 'EUR',
+        explanation: 'To Blows & Wistles Co.',
+        description: 'Payment for Blows & Wistles Co.',
+      },
+    ],
+  },
+  {
+    id: '62b61a4f-fb09-4e87-b0ab-b66c85f5485c',
+    type: 'transfer',
+    request_id: 'e0cbf84637264ee082a848b',
+    state: 'completed',
+    created_at: '2017-10-10T12:00:00Z',
+    updated_at: '2017-10-10T12:00:10Z',
+    completed_at: '2017-10-10T12:00:10Z',
+    legs: [
+      {
+        leg_id: '0485605a-6062-4820-981d-1736f4be0b2c',
+        account_id: 'bdab1c20-8d8c-430d-b967-87ac01af060c',
+        counterparty: {
+          id: '5138z40d1-05bb-49c0-b130-75e8cf2f7693',
+          type: 'revolut',
+          account_id: 'bdab1c20-8d8c-430d-b967-87ac01af060c',
+        },
+        amount: -500.00,
+        currency: 'EUR',
+        explanation: 'To Blows & Wistles Co.',
+        description: 'Payment for Blows & Wistles Co.',
+      },
+    ],
+  },
+  {
+    id: '45e8730a-cb70-47fe-8944-0fed870d9586',
+    type: 'transfer',
+    request_id: 'e0cbf84637264ee082a848b',
+    state: 'pending',
+    created_at: '2017-10-10T12:00:00Z',
+    updated_at: '2017-10-10T12:00:00Z',
+    scheduled_for: '2017-10-15',
+    legs: [
+      {
+        leg_id: '704ef03d-4cb3-4027-a7c5-d42f3b60395f',
+        account_id: 'bdab1c20-8d8c-430d-b967-87ac01af060c',
+        counterparty: {
+          id: '5138z40d1-05bb-49c0-b130-75e8cf2f7693',
+          type: 'revolut',
+          account_id: 'bdab1c20-8d8c-430d-b967-87ac01af060c',
+        },
+        amount: -43.12,
+        currency: 'EUR',
+        explanation: 'To Blows & Wistles Co.',
+        description: 'Payment for Blows & Wistles Co.',
+      },
+    ],
+  },
+];

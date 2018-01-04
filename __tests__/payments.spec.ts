@@ -76,4 +76,13 @@ describe('Payments', () => {
     expect(deleted).toBe(true);
   });
 
+  it('Should get a list of transactions', async () => {
+    const transactions = await revolutClient.payments.transactions({
+      from: '2017-06-01',
+      to: '2017-06-10',
+      counterparty: '5138z40d1-05bb-49c0-b130-75e8cf2f7693',
+      count: 10,
+    });
+  });
+
 });

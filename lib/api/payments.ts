@@ -77,7 +77,14 @@ export interface Transaction {
     country: ISOCountryCode;
   };
   legs: Leg[];
+}
 
+export interface TransactionsParams {
+  from?: ISODate;
+  to?: ISODate;
+  counterparty?: UUID;
+  count?: number;
+  type?: string;
 }
 
 export default class Payments extends API {
@@ -105,5 +112,10 @@ export default class Payments extends API {
   public cancel = (transactonId: string): Promise<boolean> => {
     return this.client.delete(`/transaction/${transactonId}`)
       .then(responseSerializer.del);
+  }
+
+  public transactions = (params: TransactionsParams): Promise<Transaction[]> => {
+    return this.client.get('/transactions', { params })
+      .then<Transaction[]>((res: AxiosResponse<Transaction[]>) => responseSerializer.get(res));
   }
 }

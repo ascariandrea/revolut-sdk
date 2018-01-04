@@ -2,7 +2,7 @@ import * as nock from 'nock';
 import RevolutClient from '../../lib';
 import { account, accounts } from './accounts';
 import { counterparties, counterparty } from './counterparties';
-import { payment, scheduledPayment, transaction, transfer } from './payments';
+import { payment, scheduledPayment, transaction, transactions, transfer } from './payments';
 
 export default function server() {
   return nock(RevolutClient.SANDBOX_URL)
@@ -34,6 +34,8 @@ export default function server() {
     .reply(200, transaction)
   .delete('/transaction/62b61a4f-fb09-4e87-b0ab-b66c85f5485c')
     .reply(204)
+  .get('/transactions?from=2017-06-01&to=2017-06-10&counterparty=5138z40d1-05bb-49c0-b130-75e8cf2f7693&count=10')
+    .reply(200, transactions)
   ;
 
 }

@@ -96,4 +96,9 @@ export default class Payments extends API {
     return this.client.get(`/transaction/${transactionId}`)
       .then<Transaction>((res: AxiosResponse<Transaction>) => responseSerializer.get(res));
   }
+
+  public transactionByRequestId = (requestId: string): Promise<Transaction> => {
+    return this.client.get(`/transaction/${requestId}`, { params: { id_type: 'request_id' }})
+      .then<Transaction>((res: AxiosResponse<Transaction>) => responseSerializer.get(res));
+  }
 }

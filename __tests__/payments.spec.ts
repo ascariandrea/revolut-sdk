@@ -62,4 +62,13 @@ describe('Payments', () => {
     expect(transaction.id).toEqual(transactionId);
     expect(transaction.type).toEqual('transfer');
   });
+
+  it('Shuold request a transaction by request id', async () => {
+    const requestId = 'e0cbf84637264ee082a848b';
+    const transaction = await revolutClient.payments.transactionByRequestId(requestId);
+    expect(transaction.request_id).toEqual(requestId);
+    expect(transaction.type).toEqual('transfer');
+  });
+
+
 });

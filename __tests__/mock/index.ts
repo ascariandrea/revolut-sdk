@@ -30,6 +30,8 @@ export default function server() {
     .reply(201, payment)
   .get('/transaction/62b61a4f-fb09-4e87-b0ab-b66c85f5485c')
     .reply(200, transaction)
+  .get('/transaction/e0cbf84637264ee082a848b?id_type=request_id')
+    .reply(200, transaction)
   ;
 
 }

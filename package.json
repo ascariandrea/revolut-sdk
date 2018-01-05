@@ -50,6 +50,9 @@
   "directories": {
     "lib": "lib"
   },
+  "files": [
+    "./dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ascariandrea/revolut-sdk.git"

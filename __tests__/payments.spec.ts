@@ -83,6 +83,8 @@ describe('Payments', () => {
       counterparty: '5138z40d1-05bb-49c0-b130-75e8cf2f7693',
       count: 10,
     });
+    expect(transactions).toBeInstanceOf(Array);
+    expect(transactions.length).toBeLessThanOrEqual(10);
   });
 
 });

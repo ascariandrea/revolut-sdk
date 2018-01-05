@@ -15,13 +15,15 @@
     "lint-test:fix": "npm run lint-test -- --fix",
     "build": "npm run clean && tsc",
     "start": "jest --watchAll",
-    "test": "jest"
+    "test": "jest",
+    "release": "smooth-release"
   },
   "devDependencies": {
     "@types/jest": "^21.1.8",
     "@types/nock": "9.1.0",
     "jest": "22.0.3",
     "nock": "^9.1.4",
+    "smooth-release": "^8.0.4",
     "ts-jest": "22.0.0",
     "tslint": "^5.8.0",
     "typescript": "^2.6.2"

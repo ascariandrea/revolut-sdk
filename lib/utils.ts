@@ -1,6 +1,6 @@
 import {AxiosResponse} from 'axios';
 
 export const responseSerializer = {
-  get: (res: AxiosResponse<RevolutSDK.CounterParty>) => res.data,
+  get: <T>(res: AxiosResponse<T>) => res.data,
   del: (res: AxiosResponse<boolean>) => res.status === 204,
 };

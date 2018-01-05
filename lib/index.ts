@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 import Accounts from './api/accounts';
 import Counterparties from './api/counterparties';
+import Payments from './api/payments';
 import { Config } from './config';
 
 const API_VERSION = 1.0;
@@ -24,4 +25,5 @@ export default class RevolutClient {
   }
   get accounts() { return new Accounts(this.client); }
   get counterparties() { return new Counterparties(this.client); }
+  get payments() { return new Payments(this.client); }
 }

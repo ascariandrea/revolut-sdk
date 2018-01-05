@@ -1,6 +1,6 @@
+import { ISODate, ThreeLettersISOCurrencyCode, UUID } from '../common';
 import { responseSerializer } from '../utils';
 import API from './api';
-import { ISODate, ThreeLettersISOCurrencyCode, UUID } from './common';
 
 export interface Account {
   id: UUID;

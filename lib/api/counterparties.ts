@@ -1,7 +1,7 @@
-import { Account } from './accounts';
-import API from './api';
 import { UUID } from '../common';
 import { responseSerializer } from '../utils';
+import { Account } from './accounts';
+import API from './api';
 
 export interface CounterPartyPayload {
   name: string;

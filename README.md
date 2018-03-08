@@ -8,7 +8,7 @@ A typesafe SDK for revolut API.
 
 ```js
 import Revolut from 'revolut-sdk';
-const revolut = new RevolutClient({
+const revolut = new Revolut({
   sandbox: true,
   apiKey: 'your-api-key'
 });

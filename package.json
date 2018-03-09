@@ -7,6 +7,7 @@
   "license": "MIT",
   "scripts": {
     "clean": "rm -rf dist/*",
+    "pretty": "prettier --write './lib/**/*'",
     "lint": "npm run lint-code && npm run lint-test",
     "lint:fix": "npm run lint-code:fix && npm run lint-test:fix",
     "lint-code": "tslint ./lib/**/*.ts",
@@ -21,7 +22,9 @@
   "devDependencies": {
     "@types/jest": "^21.1.8",
     "@types/nock": "9.1.0",
+    "husky": "^0.15.0-rc.8",
     "jest": "22.0.3",
+    "lint-staged": "7",
     "nock": "^9.1.4",
     "prettier": "1.11.1",
     "smooth-release": "^8.0.4",
@@ -32,6 +35,18 @@
   "dependencies": {
     "axios": "^0.17.1",
     "fp-ts": "^0.6.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "lib/**/*.ts": [
+      "npm run pretty",
+      "npm run lint:fix",
+      "git add"
+    ]
   },
   "jest": {
     "transform": {

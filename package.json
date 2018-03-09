@@ -23,6 +23,7 @@
     "@types/nock": "9.1.0",
     "jest": "22.0.3",
     "nock": "^9.1.4",
+    "prettier": "1.11.1",
     "smooth-release": "^8.0.4",
     "ts-jest": "22.0.0",
     "tslint": "^5.8.0",

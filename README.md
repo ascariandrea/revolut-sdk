@@ -4,6 +4,15 @@
 
 A typesafe SDK for revolut API.
 
+## Install
+```sh
+$ yarn add revolut-sdk
+
+# or if you have time to spare
+
+$ npm install revolut-sdk
+```
+
 ## Usage
 
 ```js

@@ -1,5 +1,9 @@
 import RevolutClient from '../lib'
 import runMock from './mock'
+import { Some, Option } from 'fp-ts/lib/Option'
+import { Transaction, Payment } from '../lib/api/payments'
+import { Right } from 'fp-ts/lib/Either'
+import { AxiosError } from 'axios'
 
 let revolutClient: RevolutClient
 beforeAll(() => {
@@ -18,8 +22,11 @@ describe('Payments', () => {
       description: 'Expenses funding'
     })
 
-    expect(transfer.id).toBeDefined()
-    expect(transfer.state).toEqual('completed')
+    expect(transfer.isRight()).toBe(true)
+    expect((transfer.value as Some<Transaction>).value.id).toBeDefined()
+    expect((transfer.value as Some<Transaction>).value.state).toEqual(
+      'completed'
+    )
   })
 
   it('Should create a payment', async () => {
@@ -35,8 +42,8 @@ describe('Payments', () => {
       description: 'Invoice payment #123'
     })
 
-    expect(payment.id).toBeDefined()
-    expect(payment.state).toEqual('completed')
+    expect(payment.value).toBeInstanceOf(Some)
+    expect((payment.value as Some<Payment>).value.state).toEqual('completed')
   })
 
   it('Should schedule a payment', async () => {
@@ -52,7 +59,8 @@ describe('Payments', () => {
       schedule_for: '2017-10-10'
     })
 
-    expect(payment.state).toEqual('created')
+    expect(payment.isRight()).toBe(true)
+    expect((payment.value as Some<Payment>).value.state).toEqual('created')
   })
 
   it('Should request a transaction by id', async () => {
@@ -60,8 +68,12 @@ describe('Payments', () => {
     const transaction = await revolutClient.payments.transactionById(
       transactionId
     )
-    expect(transaction.id).toEqual(transactionId)
-    expect(transaction.type).toEqual('transfer')
+    expect(transaction.isRight()).toBe(true)
+    expect((transaction.value as Some<Transaction>).isSome()).toBe(true)
+    expect((transaction.value as Some<Transaction>).value).toMatchObject({
+      id: transactionId,
+      type: 'transfer'
+    })
   })
 
   it('Shuold request a transaction by request id', async () => {
@@ -69,14 +81,21 @@ describe('Payments', () => {
     const transaction = await revolutClient.payments.transactionByRequestId(
       requestId
     )
-    expect(transaction.request_id).toEqual(requestId)
-    expect(transaction.type).toEqual('transfer')
+
+    expect(transaction.isRight()).toBe(true)
+    expect((transaction.value as Some<Transaction>).isSome()).toBe(true)
+    expect((transaction.value as Some<Transaction>).value).toMatchObject({
+      request_id: requestId,
+      type: 'transfer'
+    })
   })
 
   it('Should cancel a payment', async () => {
     const transactionId = '62b61a4f-fb09-4e87-b0ab-b66c85f5485c'
     const deleted = await revolutClient.payments.cancel(transactionId)
-    expect(deleted).toBe(true)
+
+    expect(deleted.isRight()).toBe(true)
+    expect((deleted.value as Some<any>).isSome()).toBe(true)
   })
 
   it('Should get a list of transactions', async () => {
@@ -86,7 +105,14 @@ describe('Payments', () => {
       counterparty: '5138z40d1-05bb-49c0-b130-75e8cf2f7693',
       count: 10
     })
-    expect(transactions).toBeInstanceOf(Array)
-    expect(transactions.length).toBeLessThanOrEqual(10)
+
+    expect(transactions.isRight()).toBe(true)
+    expect((transactions.value as Some<Transaction[]>).isSome()).toBe(true)
+    expect((transactions.value as Some<Transaction[]>).value).toBeInstanceOf(
+      Array
+    )
+    expect(
+      (transactions.value as Some<Transaction[]>).value.length
+    ).toBeLessThanOrEqual(10)
   })
 })

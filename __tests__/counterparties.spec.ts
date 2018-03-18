@@ -1,5 +1,7 @@
 import RevolutClient from '../lib'
 import runMock from './mock'
+import { CounterParty } from '../lib/api/counterparties'
+import { Some } from 'fp-ts/lib/Option'
 
 let revolutClient: RevolutClient
 beforeAll(() => {
@@ -15,22 +17,34 @@ describe('Counterparties', () => {
       phone: '+44723456789',
       profile_type: 'personal'
     })
-
-    expect(counterparty.name).toEqual('John Smith Co.')
+    expect(counterparty.isRight()).toBe(true)
+    expect((counterparty.value as Some<CounterParty>).isSome()).toBe(true)
+    expect((counterparty.value as Some<CounterParty>).value.name).toEqual(
+      'John Smith Co.'
+    )
   })
 
   it('Should get a counterpart', async () => {
     const counterparty = await revolutClient.counterparties.get('5')
-    expect(counterparty.name).toEqual('John Smith Co.')
+
+    expect(counterparty.isRight()).toBe(true)
+    expect((counterparty.value as Some<CounterParty>).isSome()).toBe(true)
+    expect((counterparty.value as Some<CounterParty>).value.name).toEqual(
+      'John Smith Co.'
+    )
   })
 
   it('Should get a list of counterparties', async () => {
     const counterparties = await revolutClient.counterparties.getAll()
-    expect(counterparties.length).toBe(2)
+
+    expect(counterparties.isRight()).toBe(true)
+    expect((counterparties.value as Some<CounterParty[]>).isSome()).toBe(true)
+    expect((counterparties.value as Some<CounterParty[]>).value.length).toBe(2)
   })
 
   it('Should delete a counterparty', async () => {
     const deleted = await revolutClient.counterparties.del('5')
-    expect(deleted).toEqual(true)
+    expect(deleted.isRight()).toEqual(true)
+    expect((deleted.value as Some<any>).isSome()).toEqual(true)
   })
 })

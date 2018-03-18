@@ -1,9 +1,10 @@
 {
-  "extends": "tslint:recommended",
+  "extends": ["tslint:latest", "tslint-config-prettier"],
   "rules": {
-    "interface-name": false,
     "object-literal-sort-keys": false,
-    "quotemark": [true, "single"],
+    "interface-name": false,
+    "no-submodule-imports": false,
+    "no-this-assignment": false,
     "trailing-comma": false,
     "semicolon": false
   }

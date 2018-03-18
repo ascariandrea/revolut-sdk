@@ -1,7 +1,7 @@
-import RevolutClient from '../lib'
-import runMock from './mock'
 import { Some } from 'fp-ts/lib/Option'
+import RevolutClient from '../lib'
 import { Account } from '../lib/api/accounts'
+import runMock from './mock'
 
 let revolutClient: RevolutClient
 beforeAll(() => {

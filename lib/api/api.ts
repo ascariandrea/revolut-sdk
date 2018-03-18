@@ -1,9 +1,9 @@
-import { AxiosInstance } from 'axios';
+import { AxiosInstance } from 'axios'
 
 export default class API {
-  protected client: AxiosInstance;
+  protected client: AxiosInstance
 
   constructor(client: AxiosInstance) {
-    this.client = client;
+    this.client = client
   }
 }

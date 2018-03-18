@@ -1,4 +1,4 @@
 export interface Config {
-  sandbox?: boolean;
-  apiKey: string;
+  sandbox?: boolean
+  apiKey: string
 }

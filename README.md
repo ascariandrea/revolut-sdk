@@ -23,75 +23,66 @@ const revolut = new Revolut({
 });
 ```
 
+The SDK uses [`Either`](https://github.com/gcanti/fp-ts/blob/master/src/Either.ts) and [`Option`](https://github.com/gcanti/fp-ts/blob/master/src/Option.ts) to model the result returned from API.
+
+
 #### Accounts
 ```js
-const accounts = await revolut.accounts.getAll();
-const account = await revolut.account.getById(accountId);
+revolut
+  .accounts
+  .get(accountId: string): Promise<Either<AxiosError, Option<Account>>>;
+
+revolut
+  .accounts
+  .getAll(): Promise<Either<AxiosError, Option<Account[]>>>;
 ```
 
 #### Counterparties
+
 ```js
-const counterparty =  await revolut.counterparties.add({
-  email: 'john@smith.co',
-  name: 'John Smith Co.',
-  phone: '+44723456789',
-  profile_type: 'personal',
-});
+revolut
+  .counterparties
+  .add(counterparty: Counterparty): Promise<Either<AxiosError, Option<Counterparty>>>;
 
-const counterparty = await revolut.counterparties.get(counterparty.id);
+revolut
+  .counterparties
+  .getAll(): Promise<Either<AxiosError, Option<Counterparty[]>>>;
 
-const counterparties = await revolut.counterparties.getAll();
+revolut
+  .counterparties
+  .get(counterpartyId: string): Promise<Either<AxiosError, Option<Counterparty>>>;
 
-const deleted = await revolut.counterparties.del(counterparty.id);
+revolut
+  .counterparties
+  .del(counterpartyId: string): Promise<Either<AxiosError, Option<any>>>;
 ```
 
 #### Payments
+
 ```js
-const transfer = await revolut.payments.transfer({
-  request_id: 'e0cbf84637264ee082a848b',
-  source_account_id: 'bdab1c20-8d8c-430d-b967-87ac01af060c',
-  target_account_id: '5138z40d1-05bb-49c0-b130-75e8cf2f7693',
-  amount: 123.11,
-  currency: 'EUR',
-  description: 'Expenses funding',
-});
+revolut
+  .payments
+  .transfer(transfer: TransferData): Promise<Either<AxiosError, Option<Transaction>>>;
 
-const payment = await revolutClient.payments.pay({
-  request_id: 'e0cbf84637264ee082a848b',
-  account_id: 'bdab1c20-8d8c-430d-b967-87ac01af060c',
-  receiver: {
-    counterparty_id: '5138z40d1-05bb-49c0-b130-75e8cf2f7693',
-    account_id: 'db7c73d3-b0df-4e0e-8a9a-f42aa99f52ab',
-  },
-  amount: 123.11,
-  currency: 'EUR',
-  description: 'Invoice payment #123',
-});
+revolut
+  .payments
+  .pay(payment: PaymentData): Promise<Either<AxiosError, Option<Transaction>>>;
 
-// scheduled payment
-const scheduledPayment = await revolutClient.payments.pay({
-  request_id: 'e0cbf84637264ee082a848b',
-  account_id: 'bdab1c20-8d8c-430d-b967-87ac01af060c',
-  receiver: {
-    counterparty_id: '5138z40d1-05bb-49c0-b130-75e8cf2f7693',
-  },
-  amount: 123.11,
-  currency: 'EUR',
-  description: 'Invoice payment #123',
-  schedule_for: '2017-10-10',
-});
+revolut
+  .payments
+  .transactionById(transactionId: string): Promise<Either<AxiosError, Option<Transaction>>>;
 
-const transaction = await revolutClient.payments.transactionById(payment.id);
+revolut
+  .payments
+  .transactionByRequestId(transactionRequestId: string): Promise<Either<AxiosError, Option<Transaction>>>;
 
-const transaction = await revolutClient.payments.transactionByRequestId(payment.request_id);
+revolut
+  .payments
+  .cancel(paymentId: string): Promise<Either<AxiosError, Option<any>>>;
 
-const deleted = await revolutClient.payments.cancel(payment.id);
-const transactions = await revolutClient.payments.transactions({
-  from: '2017-06-01',
-  to: '2017-06-10',
-  counterparty: '5138z40d1-05bb-49c0-b130-75e8cf2f7693',
-  count: 10,
-});
+revolut
+  .payments
+  .transactions(transactionsParams?: TransactionParams): Promise<Either<AxiosError, Option<Transaction[]>>>;
 ```
 
 

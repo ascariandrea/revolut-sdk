@@ -11,7 +11,7 @@ export interface CounterPartyPayload {
   phone: string
   email: string
 }
-export interface CounterParty {
+export interface Counterparty {
   id: UUID
   name: string
   phone: string
@@ -24,22 +24,22 @@ export interface CounterParty {
   accounts: Account[]
 }
 
-export default class Counterparies extends API {
+export default class Counterparties extends API {
   public add = (
     counterparty: CounterPartyPayload
-  ): Promise<Either<AxiosError, Option<CounterParty>>> =>
+  ): Promise<Either<AxiosError, Option<Counterparty>>> =>
     this.post('/counterparty', counterparty)
 
   public get = (
     id: string
-  ): Promise<Either<AxiosError, Option<CounterParty>>> =>
+  ): Promise<Either<AxiosError, Option<Counterparty>>> =>
     this.fetch(`/counterparty/${id}`)
 
-  public getAll = (): Promise<Either<AxiosError, Option<CounterParty[]>>> =>
+  public getAll = (): Promise<Either<AxiosError, Option<Counterparty[]>>> =>
     this.fetch('/counterparties')
 
   public del = (
     id: string
-  ): Promise<Either<AxiosError, Option<CounterParty>>> =>
+  ): Promise<Either<AxiosError, Option<Counterparty>>> =>
     this.delete(`/counterparty/${id}`)
 }

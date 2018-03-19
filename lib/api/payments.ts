@@ -122,7 +122,7 @@ export default class Payments extends API {
     this.delete(`/transaction/${transactonId}`)
 
   public transactions = (
-    params: TransactionsParams
+    params?: TransactionsParams
   ): Promise<Either<AxiosError, Option<Transaction[]>>> =>
     this.fetch('/transactions', { params })
 }

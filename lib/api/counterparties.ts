@@ -1,5 +1,7 @@
+import { AxiosError } from 'axios'
+import { Either } from 'fp-ts/lib/Either'
+import { Option } from 'fp-ts/lib/Option'
 import { UUID } from '../common'
-import { responseSerializer } from '../utils'
 import { Account } from './accounts'
 import API from './api'
 
@@ -9,7 +11,7 @@ export interface CounterPartyPayload {
   phone: string
   email: string
 }
-export interface CounterParty {
+export interface Counterparty {
   id: UUID
   name: string
   phone: string
@@ -22,24 +24,22 @@ export interface CounterParty {
   accounts: Account[]
 }
 
-export default class Counterparies extends API {
-  public add = (counterparty: CounterPartyPayload): Promise<CounterParty> => {
-    return this.client
-      .post('/counterparty', counterparty)
-      .then(responseSerializer.get)
-  }
+export default class Counterparties extends API {
+  public add = (
+    counterparty: CounterPartyPayload
+  ): Promise<Either<AxiosError, Option<Counterparty>>> =>
+    this.post('/counterparty', counterparty)
 
-  public get = (id: string): Promise<CounterParty> => {
-    return this.client.get(`/counterparty/${id}`).then(responseSerializer.get)
-  }
+  public get = (
+    id: string
+  ): Promise<Either<AxiosError, Option<Counterparty>>> =>
+    this.fetch(`/counterparty/${id}`)
 
-  public getAll = (): Promise<CounterParty[]> => {
-    return this.client.get('/counterparties').then(responseSerializer.get)
-  }
+  public getAll = (): Promise<Either<AxiosError, Option<Counterparty[]>>> =>
+    this.fetch('/counterparties')
 
-  public del = (id: string): Promise<boolean> => {
-    return this.client
-      .delete(`/counterparty/${id}`)
-      .then(responseSerializer.del)
-  }
+  public del = (
+    id: string
+  ): Promise<Either<AxiosError, Option<Counterparty>>> =>
+    this.delete(`/counterparty/${id}`)
 }

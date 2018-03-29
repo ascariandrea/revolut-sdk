@@ -1,11 +1,12 @@
-import { AxiosResponse } from 'axios'
+import { AxiosError } from 'axios'
+import { Either } from 'fp-ts/lib/Either'
+import { Option } from 'fp-ts/lib/Option'
 import {
   ISOCountryCode,
   ISODate,
   ThreeLettersISOCurrencyCode,
   UUID
 } from '../common'
-import { responseSerializer } from '../utils'
 import API from './api'
 
 export type State = 'pending' | 'completed' | 'declined' | 'failed'
@@ -93,51 +94,35 @@ export interface TransactionsParams {
 }
 
 export default class Payments extends API {
-  public transfer = (transferData: TransferData): Promise<Transfer> => {
-    return this.client
-      .post('/transfer', transferData)
-      .then<Transfer>((res: AxiosResponse<Transfer>) =>
-        responseSerializer.get(res)
-      )
-  }
+  public transfer = (
+    transferData: TransferData
+  ): Promise<Either<AxiosError, Option<Transfer>>> =>
+    this.post('/transfer', transferData)
 
-  public pay = (paymentData: PaymentData): Promise<Payment> => {
-    return this.client
-      .post('/pay', paymentData)
-      .then<Payment>((res: AxiosResponse<Payment>) =>
-        responseSerializer.get(res)
-      )
-  }
+  public pay = (
+    paymentData: PaymentData
+  ): Promise<Either<AxiosError, Option<Payment>>> =>
+    this.post('/pay', paymentData)
 
-  public transactionById = (transactionId: string): Promise<Transaction> => {
-    return this.client
-      .get(`/transaction/${transactionId}`)
-      .then<Transaction>((res: AxiosResponse<Transaction>) =>
-        responseSerializer.get(res)
-      )
-  }
+  public transactionById = (
+    transactionId: string
+  ): Promise<Either<AxiosError, Option<Transaction>>> =>
+    this.fetch(`/transaction/${transactionId}`)
 
-  public transactionByRequestId = (requestId: string): Promise<Transaction> => {
-    return this.client
-      .get(`/transaction/${requestId}`, { params: { id_type: 'request_id' } })
-      .then<Transaction>((res: AxiosResponse<Transaction>) =>
-        responseSerializer.get(res)
-      )
-  }
+  public transactionByRequestId = (
+    requestId: string
+  ): Promise<Either<AxiosError, Option<Transaction>>> =>
+    this.fetch(`/transaction/${requestId}`, {
+      params: { id_type: 'request_id' }
+    })
 
-  public cancel = (transactonId: string): Promise<boolean> => {
-    return this.client
-      .delete(`/transaction/${transactonId}`)
-      .then(responseSerializer.del)
-  }
+  public cancel = (
+    transactonId: string
+  ): Promise<Either<AxiosError, Option<any>>> =>
+    this.delete(`/transaction/${transactonId}`)
 
   public transactions = (
-    params: TransactionsParams
-  ): Promise<Transaction[]> => {
-    return this.client
-      .get('/transactions', { params })
-      .then<Transaction[]>((res: AxiosResponse<Transaction[]>) =>
-        responseSerializer.get(res)
-      )
-  }
+    params?: TransactionsParams
+  ): Promise<Either<AxiosError, Option<Transaction[]>>> =>
+    this.fetch('/transactions', { params })
 }

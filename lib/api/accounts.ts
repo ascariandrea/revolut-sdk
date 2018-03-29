@@ -1,5 +1,7 @@
+import { AxiosError } from 'axios'
+import { Either } from 'fp-ts/lib/Either'
+import { Option } from 'fp-ts/lib/Option'
 import { ISODate, ThreeLettersISOCurrencyCode, UUID } from '../common'
-import { responseSerializer } from '../utils'
 import API from './api'
 
 export interface Account {
@@ -15,11 +17,9 @@ export interface Account {
 }
 
 export default class Accounts extends API {
-  public get = (id: string): Promise<Account> => {
-    return this.client.get(`/accounts/${id}`).then(responseSerializer.get)
-  }
+  public get = (id: string): Promise<Either<AxiosError, Option<Account>>> =>
+    this.fetch(`/accounts/${id}`)
 
-  public getAll = (): Promise<Account[]> => {
-    return this.client.get('/accounts').then(responseSerializer.get)
-  }
+  public getAll = (): Promise<Either<AxiosError, Option<Account[]>>> =>
+    this.fetch<Account[]>('/accounts')
 }

@@ -2,21 +2,21 @@ export const transfer = {
   id: '62b61a4f-fb09-4e87-b0ab-b66c85f5485c',
   state: 'completed',
   created_at: '2017-06-21T11:22:11.0Z',
-  completed_at: '2017-06-21T11:22:11.0Z',
-};
+  completed_at: '2017-06-21T11:22:11.0Z'
+}
 
 export const payment = {
   id: 'd56dd396-523b-4613-8cc7-54974c17bcac',
   state: 'completed',
   created_at: '2017-10-01T10:10:10.0Z',
-  completed_at: '2017-10-01T10:10:10.0Z',
-};
+  completed_at: '2017-10-01T10:10:10.0Z'
+}
 
 export const scheduledPayment = {
   id: 'd56dd396-523b-4613-8cc7-54974c17bcac',
   state: 'created',
-  created_at: '2017-10-01T10:10:10.0Z',
-};
+  created_at: '2017-10-01T10:10:10.0Z'
+}
 
 export const transaction = {
   id: '62b61a4f-fb09-4e87-b0ab-b66c85f5485c',
@@ -32,26 +32,26 @@ export const transaction = {
       account_id: 'bdab1c20-8d8c-430d-b967-87ac01af060c',
       counterparty: {
         type: 'self',
-        account_id: '5138z40d1-05bb-49c0-b130-75e8cf2f7693',
+        account_id: '5138z40d1-05bb-49c0-b130-75e8cf2f7693'
       },
       amount: -123.11,
       currency: 'EUR',
       explanation: 'From EUR source',
-      description: 'Expenses funding',
+      description: 'Expenses funding'
     },
     {
       leg_id: '516b9146-9264-4bb5-936f-497469b5c44e',
       account_id: '5138z40d1-05bb-49c0-b130-75e8cf2f7693',
       counterparty: {
         type: 'self',
-        account_id: 'bdab1c20-8d8c-430d-b967-87ac01af060c',
+        account_id: 'bdab1c20-8d8c-430d-b967-87ac01af060c'
       },
       amount: 123.11,
       currency: 'EUR',
-      explanation: 'To EUR target',
-    },
-  ],
-};
+      explanation: 'To EUR target'
+    }
+  ]
+}
 
 export const transactions = [
   {
@@ -69,14 +69,14 @@ export const transactions = [
         counterparty: {
           id: '5138z40d1-05bb-49c0-b130-75e8cf2f7693',
           type: 'revolut',
-          account_id: 'bdab1c20-8d8c-430d-b967-87ac01af060c',
+          account_id: 'bdab1c20-8d8c-430d-b967-87ac01af060c'
         },
         amount: -123.11,
         currency: 'EUR',
         explanation: 'To Blows & Wistles Co.',
-        description: 'Payment for Blows & Wistles Co.',
-      },
-    ],
+        description: 'Payment for Blows & Wistles Co.'
+      }
+    ]
   },
   {
     id: '62b61a4f-fb09-4e87-b0ab-b66c85f5485c',
@@ -93,14 +93,14 @@ export const transactions = [
         counterparty: {
           id: '5138z40d1-05bb-49c0-b130-75e8cf2f7693',
           type: 'revolut',
-          account_id: 'bdab1c20-8d8c-430d-b967-87ac01af060c',
+          account_id: 'bdab1c20-8d8c-430d-b967-87ac01af060c'
         },
-        amount: -500.00,
+        amount: -500.0,
         currency: 'EUR',
         explanation: 'To Blows & Wistles Co.',
-        description: 'Payment for Blows & Wistles Co.',
-      },
-    ],
+        description: 'Payment for Blows & Wistles Co.'
+      }
+    ]
   },
   {
     id: '45e8730a-cb70-47fe-8944-0fed870d9586',
@@ -117,13 +117,13 @@ export const transactions = [
         counterparty: {
           id: '5138z40d1-05bb-49c0-b130-75e8cf2f7693',
           type: 'revolut',
-          account_id: 'bdab1c20-8d8c-430d-b967-87ac01af060c',
+          account_id: 'bdab1c20-8d8c-430d-b967-87ac01af060c'
         },
         amount: -43.12,
         currency: 'EUR',
         explanation: 'To Blows & Wistles Co.',
-        description: 'Payment for Blows & Wistles Co.',
-      },
-    ],
-  },
-];
+        description: 'Payment for Blows & Wistles Co.'
+      }
+    ]
+  }
+]

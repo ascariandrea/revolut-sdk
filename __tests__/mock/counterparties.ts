@@ -1,4 +1,4 @@
-export const counterparty =  {
+export const counterparty = {
   id: '6b3c696e-7c3d-464a-8dbe-fc70e183d42e',
   phone: '+44723456789',
   profile_type: 'revolut',
@@ -11,16 +11,16 @@ export const counterparty =  {
   accounts: [
     {
       id: 'e183d42e-7c3d-8dbe-464a-fc706b3c696e',
-      currency: 'GBP',
+      currency: 'GBP'
     },
     {
       id: 'e183d42e-7c3d-8dbe-464a-fc706b3c696e',
-      currency: 'EUR',
-    },
-  ],
-};
+      currency: 'EUR'
+    }
+  ]
+}
 
-const counterparty2 =  {
+const counterparty2 = {
   id: '7h7yuw36e-7c3d-464a-8dbe-2fvg523d42e',
   phone: '+44723456789',
   profile_type: 'revolut',
@@ -33,12 +33,12 @@ const counterparty2 =  {
   accounts: [
     {
       id: 'e183d42e-7c3d-8dbe-464a-fc706b3c696e',
-      currency: 'GBP',
+      currency: 'GBP'
     },
     {
       id: 'e183d42e-7c3d-8dbe-464a-fc706b3c696e',
-      currency: 'EUR',
-    },
-  ],
-};
-export const counterparties = [counterparty, counterparty2];
+      currency: 'EUR'
+    }
+  ]
+}
+export const counterparties = [counterparty, counterparty2]

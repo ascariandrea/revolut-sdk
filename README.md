@@ -1,6 +1,7 @@
 # Revolut SDK
 
 [![Build Status](https://circleci.com/gh/ascariandrea/revolut-sdk.svg?style=shield&circle-token=769c00a044724f9068b61e6c0db93083aff234e0)](https://circleci.com/gh/ascariandrea/revolut-sdk)
+[![npm version](https://badge.fury.io/js/revolut-sdk.svg)](https://badge.fury.io/js/revolut-sdk)
 
 A typesafe SDK for revolut API.
 

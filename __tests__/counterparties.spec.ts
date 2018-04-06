@@ -11,12 +11,15 @@ beforeAll(() => {
 
 describe('Counterparties', () => {
   it('Should add a counterparty', async () => {
-    const counterparty = await revolutClient.counterparties.add({
-      email: 'john@smith.co',
-      name: 'John Smith Co.',
-      phone: '+44723456789',
-      profile_type: 'personal'
-    })
+    const counterparty = await revolutClient.counterparties
+      .add({
+        email: 'john@smith.co',
+        name: 'John Smith Co.',
+        phone: '+44723456789',
+        profile_type: 'personal'
+      })
+      .run()
+
     expect(counterparty.isRight()).toBe(true)
     expect((counterparty.value as Some<Counterparty>).isSome()).toBe(true)
     expect((counterparty.value as Some<Counterparty>).value.name).toEqual(
@@ -25,7 +28,7 @@ describe('Counterparties', () => {
   })
 
   it('Should get a counterpart', async () => {
-    const counterparty = await revolutClient.counterparties.get('5')
+    const counterparty = await revolutClient.counterparties.get('5').run()
 
     expect(counterparty.isRight()).toBe(true)
     expect((counterparty.value as Some<Counterparty>).isSome()).toBe(true)
@@ -35,7 +38,7 @@ describe('Counterparties', () => {
   })
 
   it('Should get a list of counterparties', async () => {
-    const counterparties = await revolutClient.counterparties.getAll()
+    const counterparties = await revolutClient.counterparties.getAll().run()
 
     expect(counterparties.isRight()).toBe(true)
     expect((counterparties.value as Some<Counterparty[]>).isSome()).toBe(true)
@@ -43,7 +46,8 @@ describe('Counterparties', () => {
   })
 
   it('Should delete a counterparty', async () => {
-    const deleted = await revolutClient.counterparties.del('5')
+    const deleted = await revolutClient.counterparties.del('5').run()
+
     expect(deleted.isRight()).toEqual(true)
     expect((deleted.value as Some<any>).isSome()).toEqual(true)
   })

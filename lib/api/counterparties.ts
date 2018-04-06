@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios'
-import { Either } from 'fp-ts/lib/Either'
 import { Option } from 'fp-ts/lib/Option'
+import { TaskEither } from 'fp-ts/lib/TaskEither'
 import { UUID } from '../common'
 import { Account } from './accounts'
 import API from './api'
@@ -27,19 +27,15 @@ export interface Counterparty {
 export default class Counterparties extends API {
   public add = (
     counterparty: CounterPartyPayload
-  ): Promise<Either<AxiosError, Option<Counterparty>>> =>
+  ): TaskEither<AxiosError, Option<Counterparty>> =>
     this.post('/counterparty', counterparty)
 
-  public get = (
-    id: string
-  ): Promise<Either<AxiosError, Option<Counterparty>>> =>
+  public get = (id: string): TaskEither<AxiosError, Option<Counterparty>> =>
     this.fetch(`/counterparty/${id}`)
 
-  public getAll = (): Promise<Either<AxiosError, Option<Counterparty[]>>> =>
+  public getAll = (): TaskEither<AxiosError, Option<Counterparty[]>> =>
     this.fetch('/counterparties')
 
-  public del = (
-    id: string
-  ): Promise<Either<AxiosError, Option<Counterparty>>> =>
+  public del = (id: string): TaskEither<AxiosError, Option<Counterparty>> =>
     this.delete(`/counterparty/${id}`)
 }

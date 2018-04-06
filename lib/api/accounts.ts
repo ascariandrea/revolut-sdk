@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios'
-import { Either } from 'fp-ts/lib/Either'
 import { Option } from 'fp-ts/lib/Option'
+import { TaskEither } from 'fp-ts/lib/TaskEither'
 import { ISODate, ThreeLettersISOCurrencyCode, UUID } from '../common'
 import API from './api'
 
@@ -17,9 +17,9 @@ export interface Account {
 }
 
 export default class Accounts extends API {
-  public get = (id: string): Promise<Either<AxiosError, Option<Account>>> =>
+  public get = (id: string): TaskEither<AxiosError, Option<Account>> =>
     this.fetch(`/accounts/${id}`)
 
-  public getAll = (): Promise<Either<AxiosError, Option<Account[]>>> =>
+  public getAll = (): TaskEither<AxiosError, Option<Account[]>> =>
     this.fetch<Account[]>('/accounts')
 }

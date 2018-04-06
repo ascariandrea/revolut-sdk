@@ -7,6 +7,8 @@ import {
 } from 'axios'
 import { Either, left, right } from 'fp-ts/lib/Either'
 import { fromNullable, Option } from 'fp-ts/lib/Option'
+import { Task } from 'fp-ts/lib/Task'
+import { TaskEither } from 'fp-ts/lib/TaskEither'
 
 export default class API {
   constructor(private client: AxiosInstance) {}
@@ -14,28 +16,28 @@ export default class API {
   protected fetch = <T>(
     url: string,
     config?: AxiosRequestConfig
-  ): Promise<Either<AxiosError, Option<T>>> => {
+  ): TaskEither<AxiosError, Option<T>> => {
     return this.handleError<T>(this.client.get<T>(url, config))
   }
 
   protected post = <T>(
     url: string,
     data?: object
-  ): Promise<Either<AxiosError, Option<T>>> =>
+  ): TaskEither<AxiosError, Option<T>> =>
     this.handleError<T>(this.client.post<T>(url, data))
 
   protected put = <T>(
     url: string,
     data?: any,
     axiosReqConfig?: AxiosRequestConfig
-  ): Promise<Either<AxiosError, Option<T>>> => {
+  ): TaskEither<AxiosError, Option<T>> => {
     return this.handleError<T>(this.client.put<T>(url, data, axiosReqConfig))
   }
 
   protected delete = (
     url: string,
     axiosReqConfig?: AxiosRequestConfig
-  ): Promise<Either<AxiosError, Option<any>>> => {
+  ): TaskEither<AxiosError, Option<any>> => {
     return this.handleError(this.client.delete(url, axiosReqConfig))
   }
 
@@ -46,9 +48,13 @@ export default class API {
 
   private handleError = <T>(
     promise: AxiosPromise<T>
-  ): Promise<Either<AxiosError, Option<T>>> =>
-    promise
-      .then(this.success)
-      .catch(err => this.error<T>(err))
-      .then(result => result.map(v => fromNullable(v)))
+  ): TaskEither<AxiosError, Option<T>> =>
+    new TaskEither(
+      new Task(() =>
+        promise
+          .then(this.success)
+          .catch(err => this.error<T>(err))
+          .then(result => result.map(v => fromNullable(v)))
+      )
+    )
 }

@@ -49,6 +49,17 @@ jobs:
             - v1-dependencies-{{ checksum "package.json" }}
             - v1-dependencies-
       - run: yarn test
+  build:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:7.10
+    steps:
+        - checkout
+        - restore_cache:
+            keys:
+              - v1-dependencies-{{ checksum "package.json" }}
+              - v1-dependencies-
+        - run: yarn test
 
 workflows:
   version: 2

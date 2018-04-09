@@ -1,6 +1,7 @@
 import { AxiosError } from 'axios'
 import { Either } from 'fp-ts/lib/Either'
 import { Option } from 'fp-ts/lib/Option'
+import { TaskEither } from 'fp-ts/lib/TaskEither'
 import {
   ISOCountryCode,
   ISODate,
@@ -96,33 +97,30 @@ export interface TransactionsParams {
 export default class Payments extends API {
   public transfer = (
     transferData: TransferData
-  ): Promise<Either<AxiosError, Option<Transfer>>> =>
+  ): TaskEither<AxiosError, Option<Transfer>> =>
     this.post('/transfer', transferData)
 
   public pay = (
     paymentData: PaymentData
-  ): Promise<Either<AxiosError, Option<Payment>>> =>
-    this.post('/pay', paymentData)
+  ): TaskEither<AxiosError, Option<Payment>> => this.post('/pay', paymentData)
 
   public transactionById = (
     transactionId: string
-  ): Promise<Either<AxiosError, Option<Transaction>>> =>
+  ): TaskEither<AxiosError, Option<Transaction>> =>
     this.fetch(`/transaction/${transactionId}`)
 
   public transactionByRequestId = (
     requestId: string
-  ): Promise<Either<AxiosError, Option<Transaction>>> =>
+  ): TaskEither<AxiosError, Option<Transaction>> =>
     this.fetch(`/transaction/${requestId}`, {
       params: { id_type: 'request_id' }
     })
 
-  public cancel = (
-    transactonId: string
-  ): Promise<Either<AxiosError, Option<any>>> =>
+  public cancel = (transactonId: string): TaskEither<AxiosError, Option<any>> =>
     this.delete(`/transaction/${transactonId}`)
 
   public transactions = (
     params?: TransactionsParams
-  ): Promise<Either<AxiosError, Option<Transaction[]>>> =>
+  ): TaskEither<AxiosError, Option<Transaction[]>> =>
     this.fetch('/transactions', { params })
 }

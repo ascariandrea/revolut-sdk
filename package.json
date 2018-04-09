@@ -1,6 +1,6 @@
 {
   "name": "revolut-sdk",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "SDK for Revolut API",
   "main": "dist/index.js",
   "author": "Andrea Ascari <dev.ascariandrea@gmail.com>",

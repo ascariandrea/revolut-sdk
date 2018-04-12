@@ -43,19 +43,19 @@ revolut
 ```js
 revolut
   .counterparties
-  .add(counterparty: Counterparty): Promise<Either<AxiosError, Option<Counterparty>>>;
+  .add(counterparty: Counterparty): TaskEither<AxiosError, Option<Counterparty>>>;
 
 revolut
   .counterparties
-  .getAll(): Promise<Either<AxiosError, Option<Counterparty[]>>>;
+  .getAll(): TaskEither<AxiosError, Option<Counterparty[]>>>;
 
 revolut
   .counterparties
-  .get(counterpartyId: string): Promise<Either<AxiosError, Option<Counterparty>>>;
+  .get(counterpartyId: string): TaskEither<AxiosError, Option<Counterparty>>>;
 
 revolut
   .counterparties
-  .del(counterpartyId: string): Promise<Either<AxiosError, Option<any>>>;
+  .del(counterpartyId: string): TaskEither<AxiosError, Option<any>>>;
 ```
 
 #### Payments
@@ -63,27 +63,27 @@ revolut
 ```js
 revolut
   .payments
-  .transfer(transfer: TransferData): Promise<Either<AxiosError, Option<Transaction>>>;
+  .transfer(transfer: TransferData): TaskEither<AxiosError, Option<Transaction>>>;
 
 revolut
   .payments
-  .pay(payment: PaymentData): Promise<Either<AxiosError, Option<Transaction>>>;
+  .pay(payment: PaymentData): TaskEither<AxiosError, Option<Transaction>>>;
 
 revolut
   .payments
-  .transactionById(transactionId: string): Promise<Either<AxiosError, Option<Transaction>>>;
+  .transactionById(transactionId: string): TaskEither<AxiosError, Option<Transaction>>>;
 
 revolut
   .payments
-  .transactionByRequestId(transactionRequestId: string): Promise<Either<AxiosError, Option<Transaction>>>;
+  .transactionByRequestId(transactionRequestId: string): TaskEither<AxiosError, Option<Transaction>>>;
 
 revolut
   .payments
-  .cancel(paymentId: string): Promise<Either<AxiosError, Option<any>>>;
+  .cancel(paymentId: string): TaskEither<AxiosError, Option<any>>>;
 
 revolut
   .payments
-  .transactions(transactionsParams?: TransactionParams): Promise<Either<AxiosError, Option<Transaction[]>>>;
+  .transactions(transactionsParams?: TransactionParams): TaskEither<AxiosError, Option<Transaction[]>>>;
 ```
 
 

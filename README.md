@@ -31,11 +31,11 @@ The SDK uses [`Either`](https://github.com/gcanti/fp-ts/blob/master/src/Either.t
 ```js
 revolut
   .accounts
-  .get(accountId: string): Promise<Either<AxiosError, Option<Account>>>;
+  .get(accountId: string): TaskEither<AxiosError, Option<Account>>>;
 
 revolut
   .accounts
-  .getAll(): Promise<Either<AxiosError, Option<Account[]>>>;
+  .getAll(): TaskEither<AxiosError, Option<Account[]>>>;
 ```
 
 #### Counterparties

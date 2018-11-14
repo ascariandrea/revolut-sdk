@@ -17,8 +17,8 @@ $ npm install revolut-sdk
 ## Usage
 
 ```js
-import Revolut from 'revolut-sdk';
-const revolut = new Revolut({
+import { RevolutClient } from 'revolut-sdk';
+const revolut = RevolutClient.run({
   sandbox: true,
   apiKey: 'your-api-key'
 });

@@ -1,5 +1,5 @@
 import * as nock from 'nock'
-import RevolutClient from '../../lib'
+import { getBaseURL } from '../../lib'
 import { account, accounts } from './accounts'
 import { counterparties, counterparty } from './counterparties'
 import {
@@ -12,7 +12,7 @@ import {
 
 export default function server() {
   return (
-    nock(RevolutClient.SANDBOX_URL)
+    nock(getBaseURL({ sandbox: true, apiVersion: '1.0', apiKey: 'test-key' }))
       // Accounts
       .get('/accounts/42')
       .reply(200, account)

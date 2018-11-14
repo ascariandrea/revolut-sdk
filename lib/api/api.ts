@@ -2,8 +2,7 @@ import {
   AxiosError,
   AxiosInstance,
   AxiosPromise,
-  AxiosRequestConfig,
-  AxiosResponse
+  AxiosRequestConfig
 } from 'axios'
 import { Either, left, right } from 'fp-ts/lib/Either'
 import { fromNullable, Option } from 'fp-ts/lib/Option'
@@ -41,19 +40,14 @@ export default class API {
     return this.handleError(this.client.delete(url, axiosReqConfig))
   }
 
-  private success = <T>(res: AxiosResponse<T>): Either<AxiosError, T> =>
-    right(res.data)
-
-  private error = <T>(err: AxiosError): Either<AxiosError, T> => left(err)
-
   private handleError = <T>(
     promise: AxiosPromise<T>
   ): TaskEither<AxiosError, Option<T>> =>
     new TaskEither(
       new Task(() =>
         promise
-          .then(this.success)
-          .catch(err => this.error<T>(err))
+          .then((res): Either<AxiosError, T> => right(res.data))
+          .catch((err): Either<AxiosError, T> => left(err))
           .then(result => result.map(v => fromNullable(v)))
       )
     )

@@ -1,19 +1,17 @@
-import RevolutClient from '../lib'
+import { Some } from 'fp-ts/lib/Option'
+import { RevolutClient } from '../lib'
+import { Payment, Transaction } from '../lib/api/payments'
 import runMock from './mock'
-import { Some, Option } from 'fp-ts/lib/Option'
-import { Transaction, Payment } from '../lib/api/payments'
-import { Right } from 'fp-ts/lib/Either'
-import { AxiosError } from 'axios'
 
-let revolutClient: RevolutClient
+let revolut: RevolutClient
 beforeAll(() => {
   runMock()
-  revolutClient = new RevolutClient({ sandbox: true, apiKey: 'test-api-key' })
+  revolut = RevolutClient.run({ sandbox: true, apiKey: 'test-api-key' })
 })
 
 describe('Payments', () => {
   it('Should create a transfer', async () => {
-    const transfer = await revolutClient.payments
+    const transfer = await revolut.payments
       .transfer({
         request_id: 'e0cbf84637264ee082a848b',
         source_account_id: 'bdab1c20-8d8c-430d-b967-87ac01af060c',
@@ -32,7 +30,7 @@ describe('Payments', () => {
   })
 
   it('Should create a payment', async () => {
-    const payment = await revolutClient.payments
+    const payment = await revolut.payments
       .pay({
         request_id: 'e0cbf84637264ee082a848b',
         account_id: 'bdab1c20-8d8c-430d-b967-87ac01af060c',
@@ -51,7 +49,7 @@ describe('Payments', () => {
   })
 
   it('Should schedule a payment', async () => {
-    const payment = await revolutClient.payments
+    const payment = await revolut.payments
       .pay({
         request_id: 'e0cbf84637264ee082a848b',
         account_id: 'bdab1c20-8d8c-430d-b967-87ac01af060c',
@@ -71,7 +69,7 @@ describe('Payments', () => {
 
   it('Should request a transaction by id', async () => {
     const transactionId = '62b61a4f-fb09-4e87-b0ab-b66c85f5485c'
-    const transaction = await revolutClient.payments
+    const transaction = await revolut.payments
       .transactionById(transactionId)
       .run()
 
@@ -85,7 +83,7 @@ describe('Payments', () => {
 
   it('Shuold request a transaction by request id', async () => {
     const requestId = 'e0cbf84637264ee082a848b'
-    const transaction = await revolutClient.payments
+    const transaction = await revolut.payments
       .transactionByRequestId(requestId)
       .run()
 
@@ -99,14 +97,14 @@ describe('Payments', () => {
 
   it('Should cancel a payment', async () => {
     const transactionId = '62b61a4f-fb09-4e87-b0ab-b66c85f5485c'
-    const deleted = await revolutClient.payments.cancel(transactionId).run()
+    const deleted = await revolut.payments.cancel(transactionId).run()
 
     expect(deleted.isRight()).toBe(true)
     expect((deleted.value as Some<any>).isSome()).toBe(true)
   })
 
   it('Should get a list of transactions', async () => {
-    const transactions = await revolutClient.payments
+    const transactions = await revolut.payments
       .transactions({
         from: '2017-06-01',
         to: '2017-06-10',

@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
-    "fp-ts": "^1.2.0",
+    "fp-ts": "^1.10",
     "nock": "^9.2.3"
   },
   "husky": {

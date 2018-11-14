@@ -15,7 +15,6 @@ export interface Account {
   updated_at: ISODate
   type: 'pocket' | 'beneficiary'
 }
-
 export default class Accounts extends API {
   public get = (id: string): TaskEither<AxiosError, Option<Account>> =>
     this.fetch(`/accounts/${id}`)

@@ -26,7 +26,6 @@
     "@types/nock": "9.1.0",
     "husky": "^0.15.0-rc.8",
     "jest": "22.0.3",
-    "lint-staged": "7",
     "prettier": "1.11.1",
     "smooth-release": "^8.0.4",
     "ts-jest": "22.0.0",
@@ -41,15 +40,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "npm run lint"
     }
-  },
-  "lint-staged": {
-    "lib/**/*.ts": [
-      "npm run lint:fix",
-      "npm run pretty",
-      "git add"
-    ]
   },
   "jest": {
     "transform": {

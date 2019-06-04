@@ -17,8 +17,7 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
+  
   },
-  "include": [
-    "./lib"
-  ]
+  "include": ["./lib/"]
 }

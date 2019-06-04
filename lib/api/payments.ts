@@ -1,5 +1,4 @@
 import { AxiosError } from 'axios'
-import { Either } from 'fp-ts/lib/Either'
 import { Option } from 'fp-ts/lib/Option'
 import { TaskEither } from 'fp-ts/lib/TaskEither'
 import {

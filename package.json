@@ -1,8 +1,9 @@
 {
   "name": "revolut-sdk",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "SDK for Revolut API",
   "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "author": "Andrea Ascari <dev.ascariandrea@gmail.com>",
   "license": "MIT",
   "scripts": {
@@ -43,21 +44,7 @@
       "pre-commit": "npm run lint"
     }
   },
-  "jest": {
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
-    "testRegex": "(/__tests__/.*(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "testEnvironment": "node",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
-  },
+  "files": ["dist"],
   "directories": {
     "lib": "lib"
   },

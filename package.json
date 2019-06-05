@@ -35,7 +35,7 @@
     "typescript": "^2.6.2"
   },
   "dependencies": {
-    "axios": "^0.17.1",
+    "axios": "0.19.0",
     "fp-ts": "^1.10",
     "nock": "^9.2.3"
   },
@@ -44,7 +44,9 @@
       "pre-commit": "npm run lint"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "directories": {
     "lib": "lib"
   },
